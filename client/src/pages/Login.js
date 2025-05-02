@@ -20,20 +20,26 @@ export default function Login() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Login</h2>
-      {['email','password'].map(f => (
-        <div key={f}>
-          <input
-            type={f==='password' ? 'password' : 'text'}
-            name={f}
-            placeholder={f}
-            onChange={e => setForm({ ...form, [f]: e.target.value })}
-            required
-          />
-        </div>
-      ))}
-      <button type="submit">Login</button>
-    </form>
+    <div className="container d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
+      <div className="card shadow p-4" style={{ width: '100%', maxWidth: '400px' }}>
+        <h2 className="text-center mb-4">Login</h2>
+        <form onSubmit={handleSubmit}>
+          {['email', 'password'].map(f => (
+            <div className="mb-3" key={f}>
+              <label className="form-label text-capitalize">{f}</label>
+              <input
+                type={f === 'password' ? 'password' : 'text'}
+                name={f}
+                className="form-control"
+                placeholder={`Enter ${f}`}
+                onChange={e => setForm({ ...form, [f]: e.target.value })}
+                required
+              />
+            </div>
+          ))}
+          <button type="submit" className="btn btn-primary w-100">Login</button>
+        </form>
+      </div>
+    </div>
   );
 }
