@@ -3,7 +3,7 @@ import { AuthContext } from '../Context/Authcontext';
 import api from '../api/axoisconfig';
 
 export default function Dashboard() {
-  const { user } = useContext(AuthContext);
+  const { user, updateUser } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     name: user.name || '',
     email: user.email || '',
@@ -17,35 +17,29 @@ export default function Dashboard() {
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleUpdate = async () => {
     try {
-      const updatedUser = {
-        name: formData.name,
-        email: formData.email,
-        phonenumber: formData.phonenumber,
-      };
-
-      const response = await api.put(`/users/${user._id}`, updatedUser);
-      alert('Profile updated successfully!');
-      console.log(response.data);
+      const response = await api.put(`/users/${user._id}`, formData);
+      updateUser(response.data)
+      alert('Profile updated!');
     } catch (err) {
       console.error('Error updating user data:', err.message);
       alert(err.response?.data?.error || 'Update failed');
     }
   };
+  
 
   return (
     <div className="container mt-5">
       <div className="text-center mb-4">
         <h1>Welcome, {user.name}!</h1>
         <p className="text-muted">Your email: {user.email}</p>
-        <p className="text-muted">Your phone: {user.phonenumber}</p>
       </div>
 
       <div className="card shadow p-4 mx-auto" style={{ maxWidth: '500px' }}>
         <h4 className="mb-3 text-center">Update Profile</h4>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={(e) => { e.preventDefault(); handleUpdate(); }}>
+        
           <div className="mb-3">
             <label className="form-label">Name</label>
             <input
@@ -82,6 +76,7 @@ export default function Dashboard() {
               required
             />
           </div>
+
 
           <div className="text-center">
             <button type="submit" className="btn btn-primary w-100">Save</button>

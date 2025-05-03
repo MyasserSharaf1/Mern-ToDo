@@ -23,7 +23,7 @@ app.use(express.json()); // Parse JSON bodies
 const PORT = process.env.PORT || 5000;
 
 
-app.use('/api/auth/register', authRoutes);
+app.use('/api/auth', authRoutes);
 app.use('/api/todos', todoRoutes);
 app.use('/api/users', userRoutes);
 

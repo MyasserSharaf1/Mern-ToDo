@@ -4,6 +4,7 @@ const { getUser, updateUser } = require('../Controllers/userController');
 const auth = require('../middleware/authMiddleware');
 
 router.get('/:id', getUser);
-router.put('/:id',  updateUser);
+// routes/userRoutes.js
+router.put('/users/:id', auth, updateUser);
 
 module.exports = router;
