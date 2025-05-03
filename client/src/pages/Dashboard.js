@@ -6,8 +6,7 @@ export default function Dashboard() {
   const { user, updateUser } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     name: user.name || '',
-    email: user.email || '',
-    phonenumber: user.phonenumber || '',
+    email: user.email || ''
   });
 
   const handleChange = (e) => {

@@ -25,7 +25,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use('/api/auth', authRoutes);
 app.use('/api/todos', todoRoutes);
-app.use('/api/users', userRoutes);
+app.use('/api', userRoutes);
 
 
 // Test route
@@ -36,9 +36,9 @@ app.get('/', (req, res) => {
 // Connect to MongoDB
 // Connect to MongoDB (Mongoose v6+ enables new parser & topology by default)
 mongoose.connect(process.env.MONGO_URI)
-  .then(() => {console.log('✅ MongoDB connected');
+  .then(() => {console.log(' MongoDB connected');
   app.listen(PORT, () => console.log(`Server running on port ${PORT}`));})
 
-  .catch((err) => console.error('❌ MongoDB connection error:', err));
+  .catch((err) => console.error(' MongoDB connection error:', err));
 
 // Start server
